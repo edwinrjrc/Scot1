@@ -93,8 +93,6 @@ public abstract class Persona extends BaseNegocio {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
-
-
-
+	
+	
 }

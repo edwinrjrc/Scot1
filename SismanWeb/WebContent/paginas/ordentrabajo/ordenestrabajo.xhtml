@@ -14,8 +14,8 @@
 			<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1"
 				style="width:100%;">
 				<f:facet name="header">
-					<h:panelGrid width="100%" border="0" cellpadding="0"
-						cellspacing="0" style="text-align: left;vertical-align: top; ">
+					<h:panelGrid width="100%" border="0"
+						style="text-align: left;vertical-align: top; ">
 						<h:outputText value="Apertura de Ordenes de Trabajo"
 							style="height: 100px" styleClass="subtitulo" />
 						<hr width="100%" />
@@ -24,9 +24,16 @@
 
 				<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1"
 					style="width:100%;">
+					<f:facet name="header">
+						<h:panelGrid width="100%" border="0"
+							style="text-align: left;vertical-align: top; ">
+							<h:outputText value="Filtro de Busqueda" style="height: 100px;color: #5885BE;" />
+							<hr width="100%" />
+						</h:panelGrid>
+					</f:facet>
 
 					<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="4"
-						style="width:100%;">
+						style="width:100%;" columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
 						<h:outputText value="Número Orden" />
 						<h:inputText
 							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.numeroOrden}" />
@@ -34,88 +41,116 @@
 						<h:outputText value="" />
 					</h:panelGrid>
 
+					<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="4"
+						style="width:100%;" columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
+						<h:outputText value="Desde" />
+						<rich:calendar datePattern="dd/MM/yyyy"
+							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.fechaDesde}"></rich:calendar>
+						<h:outputText value="Hasta" />
+						<rich:calendar datePattern="dd/MM/yyyy"
+							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.fechaHasta}"></rich:calendar>
+					</h:panelGrid>
+
 					<f:facet name="footer">
 						<h:panelGrid cellpadding="0" cellspacing="0" border="0"
-							style="width:100%;text-align:center," columns="1">
+							style="width:100%;text-align:center;" columns="1">
 							<a4j:commandButton value="Buscar" render="idTablaOrdenes"
+								styleClass="estiloBoton3"
 								action="#{ordenTrabajoMBean.buscarOrden()}"></a4j:commandButton>
 						</h:panelGrid>
 					</f:facet>
 				</h:panelGrid>
-
-				<rich:dataTable var="fila" id="idTablaOrdenes" rows="10"
-					value="#{ordenTrabajoMBean.listaOrdenesTrabajo}"
+				<br /><br />
+				<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1"
 					style="width:100%;">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Número Orden" />
-						</f:facet>
-						<h:outputText value="#{fila.numeroOrden}" />
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Referencia Ingenieria" />
-						</f:facet>
-						<h:outputText value="#{fila.referenciaIngenieria}" />
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Avion" />
-						</f:facet>
-						<h:outputText value="#{fila.avion.matricula}" />
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Fecha Emision" />
-						</f:facet>
-						<h:outputText value="#{fila.fechaEmision}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Fecha Programada" />
-						</f:facet>
-						<h:outputText value="#{fila.fechaProgramada}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Area Responsable" />
-						</f:facet>
-						<h:outputText value="#{fila.mecanico.area.nombre}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Estado" />
-						</f:facet>
-						<h:outputText value="#{fila.estado.nombre}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</rich:column>
-
-
 					<f:facet name="header">
-						<a4j:commandButton value="Nueva Orden Trabajo"
-							action="#{ordenTrabajoMBean.nuevaOrden()}" render="idpnfrordentrabajo"
-							oncomplete="#{rich:component('idModalfrordentrabajo')}.show(); return false;"></a4j:commandButton>
+						<h:panelGrid width="100%" border="0"
+							style="text-align: left;vertical-align: top; ">
+							<h:outputText value="Resultado de Busqueda" style="height: 100px;color: #5885BE;" />
+							<hr width="100%" />
+						</h:panelGrid>
 					</f:facet>
-					<f:facet name="footer">
-						<rich:dataScroller for="idTablaOrdenes"></rich:dataScroller>
-					</f:facet>
-				</rich:dataTable>
+
+					<rich:dataTable var="fila" id="idTablaOrdenes" rows="10"
+						value="#{ordenTrabajoMBean.listaOrdenesTrabajo}"
+						style="width:100%;">
+						<f:facet name="noData">
+							<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1">
+								<h:outputText value="No se encontraron registros" />
+							</h:panelGrid>
+						</f:facet>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Número Orden" />
+							</f:facet>
+							<h:outputText value="#{fila.numeroOrden}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Referencia Ingenieria" />
+							</f:facet>
+							<h:outputText value="#{fila.referenciaIngenieria}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Avion" />
+							</f:facet>
+							<h:outputText value="#{fila.avion.matricula}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha Emision" />
+							</f:facet>
+							<h:outputText value="#{fila.fechaEmision}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha Programada" />
+							</f:facet>
+							<h:outputText value="#{fila.fechaProgramada}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Area Responsable" />
+							</f:facet>
+							<h:outputText value="#{fila.mecanico.area.nombre}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Estado" />
+							</f:facet>
+							<h:outputText value="#{fila.estado.nombre}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+
+
+						<f:facet name="header">
+							<a4j:commandButton value="Nueva Orden Trabajo"
+								action="#{ordenTrabajoMBean.nuevaOrden()}"
+								render="idpnfrordentrabajo"
+								oncomplete="#{rich:component('idModalfrordentrabajo')}.show(); return false;"></a4j:commandButton>
+						</f:facet>
+						<f:facet name="footer">
+							<rich:dataScroller for="idTablaOrdenes"></rich:dataScroller>
+						</f:facet>
+					</rich:dataTable>
+				</h:panelGrid>
 
 			</h:panelGrid>
-			<h:panelGrid cellpadding="0" cellspacing="0" border="0">
+			<h:panelGrid cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 				<a4j:commandButton id="idBotonModalCorrecto" style="display:none;"
 					type="button"
 					oncomplete="#{rich:component('idModalcorrecto')}.show();" />

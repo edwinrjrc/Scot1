@@ -15,6 +15,7 @@ import javax.faces.model.SelectItem;
 import pe.com.sistema.mantenimiento.negocio.Catalogo;
 import pe.com.sistema.mantenimiento.negocio.MaestroNave;
 import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
+import pe.com.sistema.mantenimiento.negocio.OrdenTrabajoBusqueda;
 import pe.com.sistema.mantenimiento.negocio.PersonaMantenimiento;
 import pe.com.sistema.mantenimiento.negocio.dao.MaestroCatalogoDao;
 import pe.com.sistema.mantenimiento.negocio.dao.MaestroNaveDao;
@@ -38,7 +39,7 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	private List<OrdenTrabajo> listaOrdenesTrabajo;
 
 	private OrdenTrabajo ordenTrabajo;
-	private OrdenTrabajo ordenTrabajoBusqueda;
+	private OrdenTrabajoBusqueda ordenTrabajoBusqueda;
 
 	private List<SelectItem> listaAviones;
 	private List<SelectItem> listaInspectores;
@@ -144,9 +145,9 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	/**
 	 * @return the ordenTrabajoBusqueda
 	 */
-	public OrdenTrabajo getOrdenTrabajoBusqueda() {
+	public OrdenTrabajoBusqueda getOrdenTrabajoBusqueda() {
 		if (ordenTrabajoBusqueda == null) {
-			ordenTrabajoBusqueda = new OrdenTrabajo();
+			ordenTrabajoBusqueda = new OrdenTrabajoBusqueda();
 		}
 		return ordenTrabajoBusqueda;
 	}
@@ -155,7 +156,7 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	 * @param ordenTrabajoBusqueda
 	 *            the ordenTrabajoBusqueda to set
 	 */
-	public void setOrdenTrabajoBusqueda(OrdenTrabajo ordenTrabajoBusqueda) {
+	public void setOrdenTrabajoBusqueda(OrdenTrabajoBusqueda ordenTrabajoBusqueda) {
 		this.ordenTrabajoBusqueda = ordenTrabajoBusqueda;
 	}
 

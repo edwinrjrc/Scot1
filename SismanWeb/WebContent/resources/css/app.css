@@ -75,9 +75,9 @@
 	width: 85%;
 }
 
-#estilos general
 .col1fil1formulario {
 	width: 15%;
+	font-weight: bold;
 }
 
 .col2fil1formulario {
@@ -86,6 +86,7 @@
 
 .col3fil1formulario {
 	width: 15%;
+	font-weight: bold;
 }
 
 .col4fil1formulario {
@@ -120,6 +121,13 @@
 .estiloBoton2{
 	height: 20px;
 	width: 100px;
+}
+/*
+Boton Color Naranja
+*/
+.estiloBoton3 {
+	height: 20px;
+	width: 150px;
 }
 
 .estilocampo1 {

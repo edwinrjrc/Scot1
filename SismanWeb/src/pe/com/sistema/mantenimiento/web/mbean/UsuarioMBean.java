@@ -3,11 +3,16 @@
  */
 package pe.com.sistema.mantenimiento.web.mbean;
 
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
 
+import pe.com.sistema.exception.InicioSesionException;
 import pe.com.sistema.mantenimiento.negocio.Usuario;
+import pe.com.sistema.mantenimiento.negocio.dao.SeguridadDao;
+import pe.com.sistema.mantenimiento.negocio.dao.impl.SeguridadDaoImpl;
 
 /**
  * @author Edwin
@@ -26,10 +31,21 @@ public class UsuarioMBean extends BaseMBean{
 	}
 	
 	public String inicioSesion(){
-		HttpSession session = obtenerSession(true);
-		session.setAttribute(this.USUARIO_SESSION, getUsuario());
+		try {
+			
+			HttpSession session = obtenerSession(true);
+			SeguridadDao seguridadDao = new SeguridadDaoImpl();
+			
+			session.setAttribute(this.USUARIO_SESSION, seguridadDao.iniciarSession2(getUsuario()));
+			
+			return "irInicio";
+		} catch (InicioSesionException e) {
+			obtenerRequest().setAttribute("msjeError", e.getMessage());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		return "irInicio";
+		return "";
 	}
 	
 	
