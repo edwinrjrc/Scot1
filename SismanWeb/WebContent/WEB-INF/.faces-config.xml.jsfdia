@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#ordenestrabajo.xhtml"
+  PATH="/ordenestrabajo.xhtml" SHAPE="277,230,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="irAdmOrdenesTrabajo::#ordenestrabajo.xhtml"
+    NAME="output" PATH="/ordenestrabajo.xhtml"
+    TARGET="rules:#ordenestrabajo.xhtml" TITLE="irAdmOrdenesTrabajo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="irAperturaOrdenes::#paginas#ordentrabajo#ordenestrabajo.xhtml"
+    NAME="output1" PATH="/paginas/ordentrabajo/ordenestrabajo.xhtml"
+    TARGET="rules:#paginas#ordentrabajo#ordenestrabajo.xhtml"
+    TITLE="irAperturaOrdenes" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="irInicioSistema::#index.xhtml"
+    NAME="output2" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="irInicioSistema" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="IrLogin::#index.xhtml" NAME="output3"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="IrLogin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="irInicio::#paginas#inicio.xhtml"
+    NAME="output" PATH="/paginas/inicio.xhtml"
+    TARGET="rules:#paginas#inicio.xhtml" TITLE="irInicio" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#paginas#ordentrabajo#ordenestrabajo.xhtml"
+  PATH="/paginas/ordentrabajo/ordenestrabajo.xhtml" SHAPE="256,369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#paginas#inicio.xhtml"
+  PATH="/paginas/inicio.xhtml" SHAPE="272,545,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
