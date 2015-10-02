@@ -27,13 +27,15 @@
 					<f:facet name="header">
 						<h:panelGrid width="100%" border="0"
 							style="text-align: left;vertical-align: top; ">
-							<h:outputText value="Filtro de Busqueda" style="height: 100px;color: #5885BE;" />
+							<h:outputText value="Filtro de Busqueda"
+								style="height: 100px;color: #5885BE;" />
 							<hr width="100%" />
 						</h:panelGrid>
 					</f:facet>
 
 					<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="4"
-						style="width:100%;" columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
+						style="width:100%;"
+						columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
 						<h:outputText value="Número Orden" />
 						<h:inputText
 							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.numeroOrden}" />
@@ -42,7 +44,8 @@
 					</h:panelGrid>
 
 					<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="4"
-						style="width:100%;" columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
+						style="width:100%;"
+						columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
 						<h:outputText value="Desde" />
 						<rich:calendar datePattern="dd/MM/yyyy"
 							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.fechaDesde}"></rich:calendar>
@@ -60,13 +63,15 @@
 						</h:panelGrid>
 					</f:facet>
 				</h:panelGrid>
-				<br /><br />
+				<br />
+				<br />
 				<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1"
 					style="width:100%;">
 					<f:facet name="header">
 						<h:panelGrid width="100%" border="0"
 							style="text-align: left;vertical-align: top; ">
-							<h:outputText value="Resultado de Busqueda" style="height: 100px;color: #5885BE;" />
+							<h:outputText value="Resultado de Busqueda"
+								style="height: 100px;color: #5885BE;" />
 							<hr width="100%" />
 						</h:panelGrid>
 					</f:facet>
@@ -75,7 +80,8 @@
 						value="#{ordenTrabajoMBean.listaOrdenesTrabajo}"
 						style="width:100%;">
 						<f:facet name="noData">
-							<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="1">
+							<h:panelGrid cellpadding="0" cellspacing="0" border="0"
+								columns="1">
 								<h:outputText value="No se encontraron registros" />
 							</h:panelGrid>
 						</f:facet>
@@ -136,6 +142,17 @@
 							</h:outputText>
 						</rich:column>
 
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Detalle" />
+							</f:facet>
+							<a4j:commandLink
+								action="#{ordenTrabajoMBean.verDetalleOrden(fila)}"
+								oncomplete="#{rich:component('idModalfrordentrabajo')}.show(); return false;">
+								<h:graphicImage url="/resources/img/vericono.gif" />
+							</a4j:commandLink>
+						</rich:column>
+
 
 						<f:facet name="header">
 							<a4j:commandButton value="Nueva Orden Trabajo"
@@ -150,7 +167,8 @@
 				</h:panelGrid>
 
 			</h:panelGrid>
-			<h:panelGrid cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+			<h:panelGrid cellpadding="0" cellspacing="0" border="0"
+				style="width:100%;">
 				<a4j:commandButton id="idBotonModalCorrecto" style="display:none;"
 					type="button"
 					oncomplete="#{rich:component('idModalcorrecto')}.show();" />

@@ -115,6 +115,10 @@ public class OrdenTrabajoMBean extends BaseMBean {
 
 		return listaOrdenesTrabajo;
 	}
+	
+	public void verDetalleOrden(OrdenTrabajo orden){
+		
+	}
 
 	/**
 	 * @param listaOrdenesTrabajo

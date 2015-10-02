@@ -3,7 +3,9 @@
  */
 package pe.com.sistema.mantenimiento.negocio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import pe.com.sistema.mantenimiento.base.BaseNegocio;
 import pe.com.sistema.mantenimiento.base.BaseVO;
@@ -30,6 +32,8 @@ public class OrdenTrabajo extends BaseNegocio {
 	private PersonaMantenimiento mecanico;
 	private Date fechaInspector;
 	private BaseVO area;
+	
+	private List<ArchivoAdjunto> archivosAdjuntos;
 	
 	
 	/**
@@ -199,6 +203,21 @@ public class OrdenTrabajo extends BaseNegocio {
 	 */
 	public void setArea(BaseVO area) {
 		this.area = area;
+	}
+	/**
+	 * @return the archivosAdjuntos
+	 */
+	public List<ArchivoAdjunto> getArchivosAdjuntos() {
+		if (archivosAdjuntos == null){
+			archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
+		}
+		return archivosAdjuntos;
+	}
+	/**
+	 * @param archivosAdjuntos the archivosAdjuntos to set
+	 */
+	public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
+		this.archivosAdjuntos = archivosAdjuntos;
 	}
 	
 }
