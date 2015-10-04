@@ -7,11 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
+import org.richfaces.event.FileUploadEvent;
+import org.richfaces.model.UploadedFile;
+
+import pe.com.sistema.mantenimiento.negocio.ArchivoAdjunto;
 import pe.com.sistema.mantenimiento.negocio.Catalogo;
 import pe.com.sistema.mantenimiento.negocio.MaestroNave;
 import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
@@ -45,6 +50,7 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	private List<SelectItem> listaInspectores;
 	private List<SelectItem> listaMecanicos;
 	private List<SelectItem> listaAreas;
+	private List<ArchivoAdjunto> listaArchivosAdjuntos;
 
 	private boolean registrado;
 	private boolean busco;
@@ -104,7 +110,7 @@ public class OrdenTrabajoMBean extends BaseMBean {
 		try {
 			if (!busco){
 				OrdenTrabajoDao ordenTrabajoDao = new OrdenTrabajoDaoImpl();
-				listaOrdenesTrabajo = ordenTrabajoDao.listarOrdenTrabajo();
+				listaOrdenesTrabajo = ordenTrabajoDao.buscarOrdenTrabajo(this.getOrdenTrabajoBusqueda());
 			}
 			
 			this.setShowModal(false);
@@ -118,6 +124,26 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	
 	public void verDetalleOrden(OrdenTrabajo orden){
 		
+	}
+	
+	public void listener(FileUploadEvent event) throws Exception {
+		UploadedFile item = event.getUploadedFile();
+
+		String nombre = item.getName();
+		StringTokenizer stk = new StringTokenizer(nombre, ".");
+		String archivoNombre = stk.nextToken();
+		if (stk.hasMoreTokens()) {
+			archivoNombre = stk.nextToken();
+		}
+		ArchivoAdjunto documento = new ArchivoAdjunto();
+
+		documento.setNombreArchivo(nombre);
+		documento.setExtensionArchivo(archivoNombre);
+		documento.setArregloArchivo(item.getData());
+		documento.setTipoContenido(item.getContentType());
+		documento.setTamanioArchivo((int)item.getSize());
+		
+		this.getListaArchivosAdjuntos().add(documento);
 	}
 
 	/**
@@ -347,6 +373,23 @@ public class OrdenTrabajoMBean extends BaseMBean {
 	 */
 	public void setListaAreas(List<SelectItem> listaAreas) {
 		this.listaAreas = listaAreas;
+	}
+
+	/**
+	 * @return the listaArchivosAdjuntos
+	 */
+	public List<ArchivoAdjunto> getListaArchivosAdjuntos() {
+		if (listaArchivosAdjuntos == null){
+			listaArchivosAdjuntos = new ArrayList<ArchivoAdjunto>();
+		}
+		return listaArchivosAdjuntos;
+	}
+
+	/**
+	 * @param listaArchivosAdjuntos the listaArchivosAdjuntos to set
+	 */
+	public void setListaArchivosAdjuntos(List<ArchivoAdjunto> listaArchivosAdjuntos) {
+		this.listaArchivosAdjuntos = listaArchivosAdjuntos;
 	}
 
 }

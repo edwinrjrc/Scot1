@@ -144,24 +144,36 @@
 						<f:facet name="header">
 							<h:outputText value="Documentos Adjuntos" />
 						</f:facet>
-						<rich:dataTable style="width:100%;">
+						<rich:dataTable style="width:100%;" id="idTablaAdjuntos"
+							value="#{ordenTrabajoMBean.listaArchivosAdjuntos}" var="fila">
 							<rich:column>
 								<f:facet name="header">
 									<h:outputText value="Tipo Documento" />
 								</f:facet>
-
+								<h:selectOneMenu
+									value="#{fila.tipoDocumentoArchivo.codigoEntero}">
+									<f:selectItem itemLabel="-Seleccione-" />
+								</h:selectOneMenu>
 							</rich:column>
 							<rich:column>
 								<f:facet name="header">
 									<h:outputText value="Nombre Archivo" />
 								</f:facet>
-
+								<h:outputText value="#{fila.nombreArchivo}" />
 							</rich:column>
 							<rich:column>
 								<f:facet name="header">
 									<h:outputText value="Ver" />
 								</f:facet>
+								<a4j:commandButton value="Ver"></a4j:commandButton>
 							</rich:column>
+							<f:facet name="header">
+								<h:panelGrid cellpadding="0" cellspacing="0" border="0"
+									style="width:100%;">
+									<a4j:commandButton value="Adjuntar"
+										oncomplete="#{rich:component('idModalAdjuntarArchivos')}.show(); return false;"></a4j:commandButton>
+								</h:panelGrid>
+							</f:facet>
 						</rich:dataTable>
 					</rich:tab>
 				</rich:tabPanel>

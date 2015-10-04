@@ -46,10 +46,10 @@
 					<h:panelGrid cellpadding="0" cellspacing="0" border="0" columns="4"
 						style="width:100%;"
 						columnClasses="col1fil1formulario,col2fil1formulario,col3fil1formulario,col4fil1formulario">
-						<h:outputText value="Desde" />
+						<h:outputText value="Fecha programada desde" />
 						<rich:calendar datePattern="dd/MM/yyyy"
 							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.fechaDesde}"></rich:calendar>
-						<h:outputText value="Hasta" />
+						<h:outputText value="Fecha programada Hasta" />
 						<rich:calendar datePattern="dd/MM/yyyy"
 							value="#{ordenTrabajoMBean.ordenTrabajoBusqueda.fechaHasta}"></rich:calendar>
 					</h:panelGrid>
@@ -81,7 +81,7 @@
 						style="width:100%;">
 						<f:facet name="noData">
 							<h:panelGrid cellpadding="0" cellspacing="0" border="0"
-								columns="1">
+								columns="1" style="width:100%;text-align:center;">
 								<h:outputText value="No se encontraron registros" />
 							</h:panelGrid>
 						</f:facet>
@@ -186,6 +186,7 @@
 		mostrarModal('idfradmordentrabajo');
 		</script>
 		<ui:include src="/paginas/ordentrabajo/formordentrabajo.xhtml" />
+		<ui:include src="/paginas/ordentrabajo/cargararchivo.xhtml" />
 	</ui:define>
 </ui:composition>
 </html>

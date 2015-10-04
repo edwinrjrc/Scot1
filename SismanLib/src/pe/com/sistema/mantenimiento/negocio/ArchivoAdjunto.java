@@ -15,12 +15,16 @@ public class ArchivoAdjunto extends BaseNegocio{
 	private int tamanioArchivo;
 	private InputStream streamArchivo;
 	private byte[] arregloArchivo;
+	private Integer idOrdenArchivo;
 	
 	
 	/**
 	 * @return the tipoDocumentoArchivo
 	 */
 	public BaseVO getTipoDocumentoArchivo() {
+		if (tipoDocumentoArchivo == null){
+			tipoDocumentoArchivo = new BaseVO();
+		}
 		return tipoDocumentoArchivo;
 	}
 	/**
@@ -100,6 +104,18 @@ public class ArchivoAdjunto extends BaseNegocio{
 	 */
 	public void setArregloArchivo(byte[] arregloArchivo) {
 		this.arregloArchivo = arregloArchivo;
+	}
+	/**
+	 * @return the idOrdenArchivo
+	 */
+	public Integer getIdOrdenArchivo() {
+		return idOrdenArchivo;
+	}
+	/**
+	 * @param idOrdenArchivo the idOrdenArchivo to set
+	 */
+	public void setIdOrdenArchivo(Integer idOrdenArchivo) {
+		this.idOrdenArchivo = idOrdenArchivo;
 	}
 	
 	

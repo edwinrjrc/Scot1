@@ -3,6 +3,7 @@
  */
 package pe.com.sistema.mantenimiento.negocio.dao.impl;
 
+import java.io.ByteArrayInputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +14,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import pe.com.sistema.mantenimiento.negocio.ArchivoAdjunto;
 import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
+import pe.com.sistema.mantenimiento.negocio.OrdenTrabajoBusqueda;
 import pe.com.sistema.mantenimiento.negocio.dao.OrdenTrabajoDao;
 import pe.com.sistema.util.UtilConexion;
 import pe.com.sistema.util.UtilJdbc;
@@ -214,7 +217,7 @@ public class OrdenTrabajoDaoImpl implements OrdenTrabajoDao {
 	 * @see pe.com.sistema.mantenimiento.negocio.dao.OrdenTrabajoDao#buscarOrdenTrabajo(pe.com.sistema.mantenimiento.negocio.OrdenTrabajo)
 	 */
 	@Override
-	public List<OrdenTrabajo> buscarOrdenTrabajo(OrdenTrabajo ordenTrabajo2)
+	public List<OrdenTrabajo> buscarOrdenTrabajo(OrdenTrabajoBusqueda ordenTrabajo2)
 			throws SQLException {
 		List<OrdenTrabajo> resultado = null;
 		Connection conn = null;
@@ -224,13 +227,17 @@ public class OrdenTrabajoDaoImpl implements OrdenTrabajoDao {
 		
 		try{
 			conn = UtilConexion.obtenerConexion();
-			sql = "SELECT * FROM principal.vw_ordenestrabajo where numeroorden = COALESCE(?, numeroorden)";
+			sql = "SELECT * FROM principal.vw_ordenestrabajo "
+					+ "WHERE fechaprogramada BETWEEN ? AND ? "
+					+ "AND numeroorden = COALESCE(?, numeroorden)";
 			cs = conn.prepareCall(sql);
+			cs.setDate(1, UtilJdbc.convertirUtilDateSQLDate(ordenTrabajo2.getFechaDesde()));
+			cs.setDate(2, UtilJdbc.convertirUtilDateSQLDate(ordenTrabajo2.getFechaHasta()));
 			if (StringUtils.isNotBlank(ordenTrabajo2.getNumeroOrden())){
-				cs.setString(1, ordenTrabajo2.getNumeroOrden());
+				cs.setString(3, ordenTrabajo2.getNumeroOrden());
 			}
 			else{
-				cs.setNull(1, Types.VARCHAR);
+				cs.setNull(3, Types.VARCHAR);
 			}
 			
 			rs = cs.executeQuery();
@@ -279,6 +286,55 @@ public class OrdenTrabajoDaoImpl implements OrdenTrabajoDao {
 		}
 		
 		return resultado;
+	}
+	
+	@Override
+	public boolean registrarAdjuntoOrdenTrabajo(List<ArchivoAdjunto> listaArchivos)
+			throws SQLException {
+		Connection conn = null;
+		CallableStatement cs = null;
+		String sql = "";
+		
+		try{
+			sql = "{ ? = call principal.fn_registraradjuntoordentrabajo(?,?,?,?,?,?,?)}";
+			conn = UtilConexion.obtenerConexion();
+			if (listaArchivos != null){
+				for (ArchivoAdjunto archivoAdjunto : listaArchivos) {
+					cs = conn.prepareCall(sql);
+					cs.registerOutParameter(1, Types.BOOLEAN);
+					cs.setInt(2, archivoAdjunto.getIdOrdenArchivo());
+					cs.setInt(3, archivoAdjunto.getTipoDocumentoArchivo().getCodigoEntero().intValue());
+					cs.setString(4, archivoAdjunto.getNombreArchivo());
+					cs.setString(5, archivoAdjunto.getExtensionArchivo());
+					cs.setInt(6, archivoAdjunto.getTamanioArchivo());
+					cs.setString(7, archivoAdjunto.getTipoContenido());
+					cs.setBinaryStream(8, new ByteArrayInputStream(archivoAdjunto.getArregloArchivo()), archivoAdjunto.getTamanioArchivo());
+					cs.execute();
+					
+					if (!cs.getBoolean(1)){
+						System.out.println("No se registro el archivo ::"+archivoAdjunto.getNombreArchivo());
+					}
+					else{
+						System.out.println("Archivo registrado ::"+archivoAdjunto.getNombreArchivo());
+					}
+					cs.close();
+				}
+			}
+			
+			return true;
+		}
+		catch (SQLException e){
+			throw new SQLException(e);
+		}
+		finally{
+			if (cs != null){
+				cs.close();
+			}
+			if (conn != null){
+				conn.close();
+			}
+		}
+		
 	}
 
 }

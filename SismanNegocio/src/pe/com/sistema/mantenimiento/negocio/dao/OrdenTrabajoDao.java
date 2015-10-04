@@ -6,7 +6,9 @@ package pe.com.sistema.mantenimiento.negocio.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import pe.com.sistema.mantenimiento.negocio.ArchivoAdjunto;
 import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
+import pe.com.sistema.mantenimiento.negocio.OrdenTrabajoBusqueda;
 
 /**
  * @author Edwin
@@ -47,10 +49,20 @@ public interface OrdenTrabajoDao {
 	
 	/**
 	 * 
-	 * @param ordenTrabajo
+	 * @param ordenTrabajo2
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<OrdenTrabajo> buscarOrdenTrabajo(OrdenTrabajo ordenTrabajo) throws SQLException;
+	List<OrdenTrabajo> buscarOrdenTrabajo(OrdenTrabajoBusqueda ordenTrabajo2)
+			throws SQLException;
+
+	/**
+	 * 
+	 * @param listaArchivos
+	 * @return
+	 * @throws SQLException
+	 */
+	boolean registrarAdjuntoOrdenTrabajo(List<ArchivoAdjunto> listaArchivos)
+			throws SQLException;
 	
 }
