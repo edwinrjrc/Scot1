@@ -14,9 +14,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import pe.com.sistema.mantenimiento.negocio.ArchivoAdjunto;
-import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
-import pe.com.sistema.mantenimiento.negocio.OrdenTrabajoBusqueda;
 import pe.com.sistema.mantenimiento.negocio.dao.OrdenTrabajoDao;
 import pe.com.sistema.util.UtilConexion;
 import pe.com.sistema.util.UtilJdbc;
@@ -43,7 +40,7 @@ public class OrdenTrabajoDaoImpl implements OrdenTrabajoDao {
 			cs = conn.prepareCall(sql);
 			
 			int i=1;
-			cs.registerOutParameter(i++, Types.BOOLEAN);
+			cs.registerOutParameter(i++, Types.INTEGER);
 			cs.setString(i++, ordenTrabajo.getNumeroOrden());
 			cs.setString(i++, ordenTrabajo.getReferenciaIngenieria());
 			cs.setInt(i++, ordenTrabajo.getAvion().getCodigoEntero().intValue());
@@ -109,6 +106,24 @@ public class OrdenTrabajoDaoImpl implements OrdenTrabajoDao {
 				cs.setNull(i++, Types.INTEGER);
 			}
 			cs.execute();
+			int numeroOrden = cs.getInt(1);
+			cs.close();
+			for (ArchivoAdjunto archivoAdjunto : ordenTrabajo.getArchivosAdjuntos()){
+				sql = "{ ? = call principal.fn_registraradjuntoordentrabajo(?,?,?,?,?,?,?) }";
+				cs = conn.prepareCall(sql);
+				i = 1;
+				cs.registerOutParameter(i++, Types.BOOLEAN);
+				cs.setInt(i++, cs.getInt(1));
+				cs.setInt(i++, archivoAdjunto.getTipoDocumentoArchivo().getCodigoEntero().intValue());
+				cs.setString(i++, archivoAdjunto.getNombreArchivo());
+				cs.setString(i++, archivoAdjunto.getExtensionArchivo());
+				cs.setInt(i++, archivoAdjunto.getTamanioArchivo());
+				cs.setString(i++, archivoAdjunto.getTipoContenido());
+				ByteArrayInputStream stream = new ByteArrayInputStream(archivoAdjunto.getArregloArchivo());
+				cs.setBinaryStream(i++, stream, archivoAdjunto.getTamanioArchivo());
+				cs.execute();
+				cs.close();
+			}
 			
 			return cs.getBoolean(1);
 		}

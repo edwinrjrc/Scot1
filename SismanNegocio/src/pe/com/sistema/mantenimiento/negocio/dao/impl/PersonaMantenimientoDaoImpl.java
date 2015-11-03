@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pe.com.sistema.mantenimiento.negocio.Catalogo;
-import pe.com.sistema.mantenimiento.negocio.PersonaMantenimiento;
 import pe.com.sistema.mantenimiento.negocio.dao.PersonaMantenimientoDao;
 import pe.com.sistema.util.UtilConexion;
 

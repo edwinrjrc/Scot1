@@ -153,6 +153,7 @@
 								<h:selectOneMenu
 									value="#{fila.tipoDocumentoArchivo.codigoEntero}">
 									<f:selectItem itemLabel="-Seleccione-" />
+									<f:selectItems value="#{catalogoMBean.catalogoTipoDocumentoAdjunto}"></f:selectItems>
 								</h:selectOneMenu>
 							</rich:column>
 							<rich:column>

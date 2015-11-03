@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>SismanEAR</name>
+	<name>ScotEAR</name>
 	<comment></comment>
 	<projects>
-		<project>SismanWeb</project>
-		<project>SismanLib</project>
-		<project>SismanNegocio</project>
+		<project>ScotWeb</project>
+		<project>ScotEjb</project>
+		<project>ScotEjbClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

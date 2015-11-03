@@ -12,7 +12,6 @@ import java.sql.Types;
 import org.apache.commons.lang3.StringUtils;
 
 import pe.com.sistema.exception.InicioSesionException;
-import pe.com.sistema.mantenimiento.negocio.Usuario;
 import pe.com.sistema.mantenimiento.negocio.dao.SeguridadDao;
 import pe.com.sistema.util.UtilConexion;
 import pe.com.sistema.util.UtilJdbc;

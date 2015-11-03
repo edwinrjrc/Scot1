@@ -33,6 +33,6 @@
  </navigation-rule>
  <application/>
  <lifecycle>
-  <phase-listener>pe.com.sistema.mantenimiento.web.listener.AuthorizationListener</phase-listener>
+  <phase-listener>pe.com.scot.web.listener.AuthorizationListener</phase-listener>
  </lifecycle>
 </faces-config>

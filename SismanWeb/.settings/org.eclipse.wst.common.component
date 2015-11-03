@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="SismanWeb">
+    <wb-module deploy-name="ScotWeb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/SismanWeb/build/classes"/>
+        <property name="java-output-path" value="/ScotWeb/build/classes"/>
         <property name="context-root" value="ScotWeb"/>
     </wb-module>
 </project-modules>

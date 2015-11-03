@@ -146,10 +146,10 @@
 							<f:facet name="header">
 								<h:outputText value="Detalle" />
 							</f:facet>
-							<a4j:commandLink
+							<a4j:commandLink render="idpnfrordentrabajo, idPnInfoGeneral"
 								action="#{ordenTrabajoMBean.verDetalleOrden(fila)}"
-								oncomplete="#{rich:component('idModalfrordentrabajo')}.show(); return false;">
-								<h:graphicImage url="/resources/img/vericono.gif" />
+								oncomplete="#{rich:component('idModalfrotVista')}.show(); return false;">
+								<h:graphicImage style="height:16px;width:16px;" url="/resources/img/vericono.gif" />
 							</a4j:commandLink>
 						</rich:column>
 
@@ -186,6 +186,7 @@
 		mostrarModal('idfradmordentrabajo');
 		</script>
 		<ui:include src="/paginas/ordentrabajo/formordentrabajo.xhtml" />
+		<ui:include src="/paginas/ordentrabajo/formordentrabajovista.xhtml" />
 		<ui:include src="/paginas/ordentrabajo/cargararchivo.xhtml" />
 	</ui:define>
 </ui:composition>

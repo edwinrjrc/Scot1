@@ -10,7 +10,7 @@
 	<rich:popupPanel id="idModalfrotVista" modal="true" width="900"
 		height="500">
 		<f:facet name="header">
-			<h:outputText value="Nueva Orden de Trabajo" />
+			<h:outputText value="Orden de Trabajo" />
 		</f:facet>
 		<f:facet name="controls">
 			<h:outputLink value="#" style="border:0"
@@ -29,14 +29,14 @@
 							<h:outputText value="Orden de Trabajo" />
 						</f:facet>
 
-						<h:panelGrid cellpadding="0" cellspacing="0" border="0"
-							columns="2" style="width:100%;">
+						<h:panelGrid id="idPnInfoGeneral" cellpadding="0" cellspacing="0" border="0"
+							columns="2" style="width:100%;" styleClass="col1form,col2form">
 
 							<f:facet name="header">
 								<h:panelGrid width="100%" border="0" cellpadding="0"
 									cellspacing="0" style="text-align: left;vertical-align: top; ">
 									<h:outputText id="idNomSubtitulo"
-										value="Nueva Orden de Trabajo" style="height: 100px"
+										value="Orden de Trabajo" style="height: 100px"
 										styleClass="subtitulo2" />
 									<hr width="100%" />
 								</h:panelGrid>
@@ -51,7 +51,7 @@
 
 							<h:outputText value="Avion" />
 							<h:outputText
-								value="#{ordenTrabajoMBean.ordenTrabajo.avion.nombre}" />
+								value="#{ordenTrabajoMBean.ordenTrabajo.avion.matricula}" />
 
 							<h:outputText value="Fecha Emisión" />
 							<h:outputText

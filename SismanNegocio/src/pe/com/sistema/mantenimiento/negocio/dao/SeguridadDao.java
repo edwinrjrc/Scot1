@@ -6,7 +6,6 @@ package pe.com.sistema.mantenimiento.negocio.dao;
 import java.sql.SQLException;
 
 import pe.com.sistema.exception.InicioSesionException;
-import pe.com.sistema.mantenimiento.negocio.Usuario;
 
 /**
  * @author EDWREB

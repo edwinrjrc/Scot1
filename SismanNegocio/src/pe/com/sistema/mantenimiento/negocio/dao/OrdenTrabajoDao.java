@@ -6,9 +6,6 @@ package pe.com.sistema.mantenimiento.negocio.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import pe.com.sistema.mantenimiento.negocio.ArchivoAdjunto;
-import pe.com.sistema.mantenimiento.negocio.OrdenTrabajo;
-import pe.com.sistema.mantenimiento.negocio.OrdenTrabajoBusqueda;
 
 /**
  * @author Edwin
